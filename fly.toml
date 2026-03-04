@@ -1,10 +1,27 @@
-# fly.toml app configuration file generated for n8n
+# fly.toml app configuration file generated for n8n-amazing on 2026-03-04T20:20:49Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "n8n-app-name" # Substitua pelo nome do seu app
-primary_region = "gru" # São Paulo
+app = 'n8n-amazing'
+primary_region = 'gru'
 
 [build]
-  image = "docker.n8n.io/n8nio/n8n:latest"
+   image = "docker.n8n.io/n8nio/n8n:latest"
+   
+[http_service]
+  internal_port = 5678
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 1024
 
 [env]
   N8N_PORT = "5678"
@@ -12,21 +29,18 @@ primary_region = "gru" # São Paulo
   NODE_ENV = "production"
   GENERIC_TIMEZONE = "America/Sao_Paulo"
   TZ = "America/Sao_Paulo"
-  N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS = "false"
-
-[http_service]
-  internal_port = 5678
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
+  
+  N8N_EMAIL_MODE=smtp
+  N8N_SMTP_HOST=smtp.gmail.com
+  N8N_SMTP_PORT=465
+  N8N_SMTP_USER=
+  N8N_SMTP_PASS=
+  N8N_SMTP_SENDER=
+  N8N_SMTP_SSL=true
+  N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+  N8N_RUNNERS_ENABLED=true
+  N8N_SECURE_COOKIE=false
 
 [[mounts]]
   source = "n8n_data"
   destination = "/home/node/.n8n"
-
-[vm]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 1024 # n8n recomenda pelo menos 1GB
