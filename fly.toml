@@ -1,22 +1,24 @@
 # fly.toml app configuration file generated for n8n
 
-app = "n8n-app-name" # Substitua pelo nome do seu app
+app = "n8n-amazing" # Nome do seu app
 primary_region = "gru" # São Paulo
 
 [build]
   image = "docker.n8n.io/n8nio/n8n:latest"
 
 [env]
-  N8N_PORT = "5678"
-  N8N_PROTOCOL = "http"
+  N8N_PORT = "8080"
+  N8N_PROTOCOL = "https"
+  WEBHOOK_URL = "https://n8n-amazing.fly.dev/"
+  N8N_SECURE_COOKIE = "true"
   NODE_ENV = "production"
   GENERIC_TIMEZONE = "America/Sao_Paulo"
   TZ = "America/Sao_Paulo"
   N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS = "false"
 
 [http_service]
-  internal_port = 5678
-  force_https = false
+  internal_port = 8080
+  force_https = true
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0

@@ -1,4 +1,4 @@
-# manage-n8n.ps1
+# restart-n8n.ps1
 # Script to stop and restart n8n containers using Podman
 
 $projectDir = "C:\n8n"
